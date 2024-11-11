@@ -1,0 +1,11 @@
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\bin\Debug\net8.0\Somes.Domain.deps.json
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\bin\Debug\net8.0\Somes.Domain.dll
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\bin\Debug\net8.0\Somes.Domain.pdb
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.AssemblyInfoInputs.cache
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.AssemblyInfo.cs
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.csproj.CoreCompileInputs.cache
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.dll
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\refint\Somes.Domain.dll
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\Somes.Domain.pdb
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.Domain\obj\Debug\net8.0\ref\Somes.Domain.dll

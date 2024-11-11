@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup />
+  <ItemGroup>
+    <ApplicationDefinition Update="App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Components\Details.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Components\DetailsForm.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Components\Listing.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Components\ListingItem.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\AddSomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\EditSomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SomeView.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Update="Components\Details.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\DetailsForm.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\Listing.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Components\ListingItem.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\AddSomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\EditSomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SomeView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+</Project>
