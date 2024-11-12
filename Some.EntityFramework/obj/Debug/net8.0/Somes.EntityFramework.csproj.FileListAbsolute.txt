@@ -15,3 +15,4 @@ C:\Users\opali\source\repos\WpfDataGridToSql02\Some.EntityFramework\obj\Debug\ne
 C:\Users\opali\source\repos\WpfDataGridToSql02\Some.EntityFramework\obj\Debug\net8.0\Somes.EntityFramework.pdb
 C:\Users\opali\source\repos\WpfDataGridToSql02\Some.EntityFramework\obj\Debug\net8.0\Somes.EntityFramework.genruntimeconfig.cache
 C:\Users\opali\source\repos\WpfDataGridToSql02\Some.EntityFramework\obj\Debug\net8.0\ref\Somes.EntityFramework.dll
+C:\Users\opali\source\repos\WpfDataGridToSql02\Some.EntityFramework\obj\Debug\net8.0\Somes.EntityFramework.sourcelink.json

@@ -1,4 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Somes.Domain.Commands;
 using Somes.Domain.Queries;
 using Somes.EntityFramework;
@@ -9,6 +12,7 @@ using System.Data;
 using System.Windows;
 using WpfDataGridToSql02.Stores;
 using WpfDataGridToSql02.ViewModels;
+using WpfDataGridToSql02.HostBuilders;
 
 namespace WpfDataGridToSql02
 {
@@ -17,61 +21,76 @@ namespace WpfDataGridToSql02
     /// </summary>
     public partial class App : Application
     {
-        private readonly ModalNavigationStore _modalNavigationStore;
-        private readonly SomeDbContextFactory _someDbContextFactory;
-        private readonly IGetAllSomeQuery _getAllSomeQuery;
-        private readonly ICreateSomeCommand _createSomeCommand;
-        private readonly IUpdateSomeCommand _updateSomeCommand;
-        private readonly IDeleteSomeCommand _deleteSomeCommand;
-        private readonly SomeStore _someStore;
-        private readonly SelectedSomeStore _selectedSomeStore;
+        private readonly IHost _host;
 
         public App()
         {
+            _host = Host.CreateDefaultBuilder()
+                .AddDbContext()
+                .ConfigureServices((context, services) =>
+                {
+                    //                    string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Zadatak;";
+
+                    services.AddSingleton<IGetAllSomeQuery, GetAllSomeQuery>();
+                    services.AddSingleton<ICreateSomeCommand, CreateSomeCommand>();
+                    services.AddSingleton<IUpdateSomeCommand, UpdateSomeCommand>();
+                    services.AddSingleton<IDeleteSomeCommand, DeleteSomeCommand>(); 
+
+                    services.AddSingleton<ModalNavigationStore>();
+                    services.AddSingleton<SomeStore>();
+                    services.AddSingleton<SelectedSomeStore>();
+
+                    services.AddSingleton<MainViewModel>();
+                    services.AddTransient<SomeViewViewModel>(CreateSomeViewModel );
+
+
+                    services.AddSingleton<MainWindow>((services) => new MainWindow()
+                    {
+                        DataContext = services.GetRequiredService<MainViewModel>()
+                    });
+                })
+
+                .Build();
+
             // sqlLite
             //            string _connectionString = "Data Source=YouTubeViewers.db";
-            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=Zadatak;";
 
-            _modalNavigationStore = new ModalNavigationStore();
-
-            _someDbContextFactory = new SomeDbContextFactory(
-                new DbContextOptionsBuilder().UseSqlServer(connectionString).Options);
-
-            _getAllSomeQuery = new GetAllSomeQuery(_someDbContextFactory);
-            _createSomeCommand = new CreateSomeCommand(_someDbContextFactory);
-            _updateSomeCommand = new UpdateSomeCommand(_someDbContextFactory);
-            _deleteSomeCommand = new DeleteSomeCommand(_someDbContextFactory);
-
-            _someStore = new SomeStore(
-                _getAllSomeQuery, 
-                _createSomeCommand, 
-                _updateSomeCommand, 
-                _deleteSomeCommand);
-
-            _selectedSomeStore = new SelectedSomeStore(_someStore);
         }
+
         protected override void OnStartup(StartupEventArgs e)
         {
+            _host.Start();
+
+
             // automaticaly acomplish migrations:
-            //using(SomeDbContext context = _someDbContextFactory.Create())
+            // SomeDbContextFactory  someDbContextFactory = _host.Services.GetRequiredService<SomeDbContextFactory>();
+            //using(SomeDbContext context = someDbContextFactory.Create())
             //{
             //    context.Database.Migrate();
             //}
 
-            SomeViewViewModel someViewViewModel = SomeViewViewModel.LoadViewModel(
-                _someStore, 
-                _selectedSomeStore, 
-                _modalNavigationStore);
-
-            MainWindow = new MainWindow()
-            {
-                DataContext = new MainViewModel(_modalNavigationStore, someViewViewModel) 
-            };
-
+            MainWindow = _host.Services.GetRequiredService<MainWindow>();
             MainWindow.Show();
 
             base.OnStartup(e);
         }
+
+        protected override void OnExit(ExitEventArgs e)
+        {
+            _host.StopAsync();
+            _host.Dispose();
+
+            base.OnExit(e);
+        }
+
+        private SomeViewViewModel CreateSomeViewModel(IServiceProvider services)
+        {
+            return SomeViewViewModel.LoadViewModel(
+                services.GetRequiredService<SomeStore>(),
+                services.GetRequiredService<SelectedSomeStore>(),
+                services.GetRequiredService<ModalNavigationStore>());
+        }
+
     }
 
 }
